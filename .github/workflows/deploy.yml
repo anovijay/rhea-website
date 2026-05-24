@@ -1,0 +1,57 @@
+name: Deploy to GCS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Upload to GCS
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: out
+          destination: www.rheaapps.com
+          parent: false
+          headers: |-
+            cache-control: no-cache, no-store, must-revalidate
+          glob: '**/*.html'
+
+      - name: Upload static assets (long cache)
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: out/_next
+          destination: www.rheaapps.com/_next
+          parent: false
+          headers: |-
+            cache-control: public, max-age=31536000, immutable
+
+      - name: Upload remaining assets
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: out
+          destination: www.rheaapps.com
+          parent: false
+          glob: '!**/*.html,!**/_next/**'
