@@ -84,6 +84,15 @@ jobs:
           headers: |-
             cache-control: public, max-age=31536000, immutable
 
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: reckon/out
+          destination: reckon.rheaapps.com
+          parent: false
+          headers: |-
+            cache-control: public, max-age=86400
+          glob: '**/*.png'
+
   # ── Privacy policy (static HTML) ─────────────────────────────────────────
   deploy-privacy:
     name: Deploy privacy.reckon.rheaapps.com

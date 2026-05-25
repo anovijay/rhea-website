@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Reckon — Daily Accountability, Just You',
@@ -35,11 +36,11 @@ export default function Page() {
   return (
     <>
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-16 border-b border-white/5 bg-[#0f0f0f]/90 backdrop-blur-md">
-        <span className="font-display text-2xl tracking-widest text-white">RECKON</span>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-16 border-b border-slate-100 bg-white/90 backdrop-blur-md">
+        <span className="font-display text-2xl tracking-widest text-slate-900">RECKON</span>
         <a
           href="#download"
-          className="text-xs font-semibold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors"
+          className="text-xs font-semibold uppercase tracking-widest text-amber-600 hover:text-amber-700 transition-colors"
         >
           Download
         </a>
@@ -47,52 +48,57 @@ export default function Page() {
 
       <main>
         {/* ── HERO ── */}
-        <section className="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-16">
-          {/* Background grid */}
+        <section className="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-16 bg-gradient-to-br from-slate-50 via-white to-amber-50/40">
+          {/* Dot grid */}
           <div
-            className="absolute inset-0 opacity-[0.04]"
+            className="absolute inset-0 opacity-[0.35]"
             style={{
-              backgroundImage:
-                'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-              backgroundSize: '60px 60px',
+              backgroundImage: 'radial-gradient(circle, #94a3b8 1px, transparent 1px)',
+              backgroundSize: '28px 28px',
             }}
           />
-          {/* Amber glow */}
-          <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
           <div className="relative max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center py-24">
             {/* Text */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500 mb-6">
-                A Rhea Apps product
-              </p>
-              <h1 className="font-display text-[clamp(5rem,14vw,10rem)] leading-[0.92] text-white mb-8">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-amber-50 border border-amber-100 rounded-full mb-6">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                </span>
+                <span className="text-xs font-semibold text-amber-700 tracking-widest uppercase">
+                  A Rhea Apps product
+                </span>
+              </div>
+              <h1 className="font-display text-[clamp(4rem,12vw,8rem)] leading-[0.92] text-slate-900 mb-8">
                 RECKON
                 <br />
-                <span className="text-amber-400 text-amber-glow">WITH</span>
+                <span className="text-amber-500">WITH</span>
                 <br />
                 YOURSELF.
               </h1>
-              <p className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-md mb-10">
+              <p className="text-lg lg:text-xl text-slate-500 leading-relaxed max-w-md mb-10">
                 Define the questions that matter. Answer them every day.
                 Watch what you&apos;re made of.
               </p>
               <div className="flex flex-wrap gap-4 items-center" id="download">
                 <AppStoreBadge />
-                <p className="text-xs text-white/30 uppercase tracking-widest">
+                <p className="text-xs text-slate-400 uppercase tracking-widest">
                   iOS · Free
                 </p>
               </div>
             </div>
 
-            {/* Phone mockup */}
-            <div className="hidden lg:flex justify-center">
+            {/* Phone screenshot */}
+            <div className="hidden lg:flex justify-center items-center">
               <PhoneMockup />
             </div>
           </div>
 
           {/* Scroll hint */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-300">
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -101,16 +107,14 @@ export default function Page() {
         </section>
 
         {/* ── PHILOSOPHY ── */}
-        <section className="py-32 px-6 lg:px-12 border-t border-white/5">
+        <section className="py-32 px-6 lg:px-12 border-t border-slate-100">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500 mb-8">
-                The Philosophy
-              </p>
-              <blockquote className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] text-white mb-12">
+              <p className="section-label">The Philosophy</p>
+              <blockquote className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] text-slate-900 mb-12">
                 YOU AND ONLY YOU HOLD THE KEY TO CHANGE YOUR LIFE.
               </blockquote>
-              <div className="grid sm:grid-cols-2 gap-8 text-white/50 text-base leading-relaxed max-w-3xl">
+              <div className="grid sm:grid-cols-2 gap-8 text-slate-500 text-base leading-relaxed max-w-3xl">
                 <p>
                   No algorithm will fix your discipline. No motivational quote will make you show up.
                   No coach can want it for you. The only force powerful enough to change your life
@@ -127,21 +131,19 @@ export default function Page() {
         </section>
 
         {/* ── HOW IT WORKS ── */}
-        <section className="py-32 px-6 lg:px-12 bg-white/[0.02] border-t border-white/5">
+        <section className="py-32 px-6 lg:px-12 bg-slate-50 border-t border-slate-100">
           <div className="max-w-7xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500 mb-16">
-              How It Works
-            </p>
-            <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+            <p className="section-label">How It Works</p>
+            <div className="grid md:grid-cols-3 gap-12 lg:gap-16 mt-16">
               {steps.map((step) => (
                 <div key={step.number}>
-                  <div className="font-display text-7xl text-amber-500/20 mb-4 leading-none">
+                  <div className="font-display text-7xl text-amber-200 mb-4 leading-none">
                     {step.number}
                   </div>
-                  <h3 className="font-display text-3xl text-white mb-4 tracking-wide">
+                  <h3 className="font-display text-3xl text-slate-900 mb-4 tracking-wide">
                     {step.title.toUpperCase()}
                   </h3>
-                  <p className="text-white/50 leading-relaxed">{step.body}</p>
+                  <p className="text-slate-500 leading-relaxed">{step.body}</p>
                 </div>
               ))}
             </div>
@@ -149,16 +151,14 @@ export default function Page() {
         </section>
 
         {/* ── WHAT IT'S NOT ── */}
-        <section className="py-32 px-6 lg:px-12 border-t border-white/5">
+        <section className="py-32 px-6 lg:px-12 border-t border-slate-100">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500 mb-8">
-                No Gimmicks
-              </p>
-              <h2 className="font-display text-[clamp(3rem,7vw,6rem)] leading-[0.95] text-white mb-6">
+              <p className="section-label">No Gimmicks</p>
+              <h2 className="font-display text-[clamp(3rem,7vw,6rem)] leading-[0.95] text-slate-900 mb-6">
                 WHAT RECKON IS NOT.
               </h2>
-              <p className="text-white/40 leading-relaxed max-w-sm">
+              <p className="text-slate-500 leading-relaxed max-w-sm">
                 The world is full of apps that promise to change you. Reckon makes no such promise.
                 It only asks the question.
               </p>
@@ -167,10 +167,10 @@ export default function Page() {
               {notList.map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 p-4 border border-white/10 rounded-xl bg-white/[0.02]"
+                  className="flex items-center gap-3 p-4 border border-slate-200 rounded-xl bg-white card-hover"
                 >
-                  <span className="text-red-500/70 font-bold text-lg leading-none flex-shrink-0">✕</span>
-                  <span className="text-white/50 text-sm font-medium">{item}</span>
+                  <span className="text-red-400 font-bold text-lg leading-none flex-shrink-0">✕</span>
+                  <span className="text-slate-600 text-sm font-medium">{item}</span>
                 </div>
               ))}
             </div>
@@ -178,12 +178,10 @@ export default function Page() {
         </section>
 
         {/* ── EXAMPLE QUESTIONS ── */}
-        <section className="py-32 px-6 lg:px-12 bg-amber-500/5 border-t border-amber-500/10">
+        <section className="py-32 px-6 lg:px-12 bg-amber-50/60 border-t border-amber-100/60">
           <div className="max-w-7xl mx-auto text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500 mb-8">
-              Your Questions. Your Rules.
-            </p>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white mb-16 leading-tight">
+            <p className="section-label">Your Questions. Your Rules.</p>
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-slate-900 mb-16 leading-tight">
               WHAT WILL YOU ASK YOURSELF?
             </h2>
             <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
@@ -199,7 +197,7 @@ export default function Page() {
               ].map((q) => (
                 <div
                   key={q}
-                  className="px-5 py-3 border border-white/10 rounded-full text-white/60 text-sm hover:border-amber-500/40 hover:text-white/80 transition-all"
+                  className="px-5 py-3 border border-slate-200 rounded-full text-slate-500 text-sm bg-white hover:border-amber-400 hover:text-slate-700 transition-all"
                 >
                   {q}
                 </div>
@@ -209,16 +207,16 @@ export default function Page() {
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="py-40 px-6 lg:px-12 border-t border-white/5 text-center">
+        <section className="py-40 px-6 lg:px-12 border-t border-slate-100 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-display text-[clamp(3.5rem,9vw,7rem)] leading-[0.92] text-white mb-8">
+            <h2 className="font-display text-[clamp(3.5rem,9vw,7rem)] leading-[0.92] text-slate-900 mb-8">
               ARE YOU
               <br />
-              <span className="text-amber-400 text-amber-glow">READY</span>
+              <span className="text-amber-500">READY</span>
               <br />
               TO RECKON?
             </h2>
-            <p className="text-white/40 mb-12 text-lg">
+            <p className="text-slate-400 mb-12 text-lg">
               No coach. No AI. No magic. Just the daily choice to be honest with yourself.
             </p>
             <AppStoreBadge large />
@@ -227,11 +225,11 @@ export default function Page() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 px-6 lg:px-12 py-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/20 text-xs">
-          <span className="font-display tracking-widest text-sm">RECKON</span>
-          <span>A product by <a href="https://www.rheaapps.com" className="hover:text-white/50 transition-colors">Rhea Apps</a> · Munich, Germany</span>
-          <a href="/privacy/" className="hover:text-white/50 transition-colors">
+      <footer className="border-t border-slate-100 px-6 lg:px-12 py-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs">
+          <span className="font-display tracking-widest text-sm text-slate-900">RECKON</span>
+          <span>A product by <a href="https://www.rheaapps.com" className="hover:text-slate-600 transition-colors">Rhea Apps</a> · Munich, Germany</span>
+          <a href="/privacy/" className="hover:text-slate-600 transition-colors">
             Privacy Policy
           </a>
         </div>
@@ -244,7 +242,7 @@ function AppStoreBadge({ large = false }: { large?: boolean }) {
   return (
     <a
       href="#"
-      className={`inline-flex items-center gap-3 bg-white text-black font-semibold rounded-xl hover:bg-amber-400 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-500/20 ${
+      className={`inline-flex items-center gap-3 bg-slate-900 text-white font-semibold rounded-xl hover:bg-amber-500 hover:text-slate-900 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-500/20 ${
         large ? 'px-8 py-4 text-base' : 'px-6 py-3 text-sm'
       }`}
     >
@@ -261,80 +259,17 @@ function AppStoreBadge({ large = false }: { large?: boolean }) {
 }
 
 function PhoneMockup() {
-  const questions = [
-    { text: 'Did you exercise today?', answer: true },
-    { text: 'Did you sleep 8 hours?', answer: false },
-    { text: 'Did you read today?', answer: true },
-    { text: 'Did you eat well today?', answer: true },
-  ]
-
   return (
-    <div className="relative w-72">
-      {/* Glow */}
-      <div className="absolute inset-0 bg-amber-500/10 blur-3xl rounded-full scale-110" />
-
-      {/* Phone shell */}
-      <div className="relative bg-[#1a1a1a] border border-white/10 rounded-[2.5rem] p-3 shadow-2xl">
-        {/* Screen */}
-        <div className="bg-[#111] rounded-[2rem] overflow-hidden">
-          {/* Status bar */}
-          <div className="flex items-center justify-between px-6 pt-4 pb-2">
-            <span className="text-white/40 text-xs">9:41</span>
-            <div className="w-20 h-5 bg-black rounded-full" />
-            <div className="flex gap-1">
-              <div className="w-3 h-3 rounded-sm bg-white/20" />
-              <div className="w-3 h-3 rounded-sm bg-white/20" />
-            </div>
-          </div>
-
-          {/* App content */}
-          <div className="px-5 pb-8 pt-2">
-            <p className="font-display text-2xl text-white tracking-wider mb-1">RECKON</p>
-            <p className="text-white/30 text-xs mb-6">Sunday, May 25</p>
-
-            <p className="text-white/50 text-xs uppercase tracking-widest mb-4">
-              Today&apos;s Check-in
-            </p>
-
-            <div className="space-y-3">
-              {questions.map((q, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3"
-                >
-                  <span className="text-white/70 text-xs leading-tight max-w-[160px]">
-                    {q.text}
-                  </span>
-                  <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ml-2 ${
-                      q.answer ? 'bg-amber-500' : 'bg-white/10'
-                    }`}
-                  >
-                    {q.answer ? (
-                      <svg className="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ) : (
-                      <svg className="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Streak */}
-            <div className="mt-6 bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 flex items-center justify-between">
-              <div>
-                <p className="text-amber-400 font-display text-2xl tracking-wide">12</p>
-                <p className="text-white/30 text-xs">day streak</p>
-              </div>
-              <div className="text-2xl">🔥</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="relative">
+      <div className="absolute inset-0 bg-amber-100/60 blur-3xl rounded-full scale-110" />
+      <Image
+        src="/app-screenshot.png"
+        alt="Reckon app screenshot"
+        width={300}
+        height={620}
+        className="relative drop-shadow-xl"
+        priority
+      />
     </div>
   )
 }

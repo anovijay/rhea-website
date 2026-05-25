@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import '@fontsource/bebas-neue'
-import '@fontsource-variable/dm-sans'
+import '@fontsource-variable/fraunces'
+import '@fontsource-variable/outfit'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased bg-[#0f0f0f] text-white">{children}</body>
+      <body className="font-sans antialiased bg-white text-slate-700">{children}</body>
     </html>
   )
 }

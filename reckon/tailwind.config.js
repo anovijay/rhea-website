@@ -6,17 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Bebas Neue', ...fontFamily.sans],
-        sans: ['DM Sans Variable', ...fontFamily.sans],
-      },
-      colors: {
-        amber: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-        },
-      },
-      letterSpacing: {
-        widest2: '0.2em',
+        display: ['Fraunces Variable', ...fontFamily.serif],
+        sans: ['Outfit Variable', ...fontFamily.sans],
       },
     },
   },
