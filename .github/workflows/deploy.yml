@@ -6,32 +6,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  # ── Main Rhea Apps website ────────────────────────────────────────────────
+  deploy-main:
+    name: Deploy www.rheaapps.com
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Build
-        run: npm run build
+      - run: npm run build
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
+      - uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Upload to GCS
-        uses: google-github-actions/upload-cloud-storage@v2
+      - uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: out
           destination: www.rheaapps.com
@@ -40,8 +35,7 @@ jobs:
             cache-control: no-cache, no-store, must-revalidate
           glob: '**/*.html'
 
-      - name: Upload static assets (long cache)
-        uses: google-github-actions/upload-cloud-storage@v2
+      - uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: out/_next
           destination: www.rheaapps.com/_next
@@ -49,10 +43,62 @@ jobs:
           headers: |-
             cache-control: public, max-age=31536000, immutable
 
-      - name: Upload remaining assets
-        uses: google-github-actions/upload-cloud-storage@v2
+  # ── Reckon landing page ───────────────────────────────────────────────────
+  deploy-reckon:
+    name: Deploy reckon.rheaapps.com
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reckon
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          path: out
-          destination: www.rheaapps.com
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: reckon/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: reckon/out
+          destination: reckon.rheaapps.com
           parent: false
-          glob: '!**/*.html,!**/_next/**'
+          headers: |-
+            cache-control: no-cache, no-store, must-revalidate
+          glob: '**/*.html'
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: reckon/out/_next
+          destination: reckon.rheaapps.com/_next
+          parent: false
+          headers: |-
+            cache-control: public, max-age=31536000, immutable
+
+  # ── Privacy policy (static HTML) ─────────────────────────────────────────
+  deploy-privacy:
+    name: Deploy privacy.reckon.rheaapps.com
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: reckon-privacy
+          destination: privacy.reckon.rheaapps.com
+          parent: false
+          headers: |-
+            cache-control: no-cache, no-store, must-revalidate
