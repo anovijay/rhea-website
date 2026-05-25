@@ -231,7 +231,7 @@ export default function Page() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/20 text-xs">
           <span className="font-display tracking-widest text-sm">RECKON</span>
           <span>A product by <a href="https://www.rheaapps.com" className="hover:text-white/50 transition-colors">Rhea Apps</a> · Munich, Germany</span>
-          <a href="https://privacy.reckon.rheaapps.com" className="hover:text-white/50 transition-colors">
+          <a href="/privacy/" className="hover:text-white/50 transition-colors">
             Privacy Policy
           </a>
         </div>
