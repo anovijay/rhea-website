@@ -93,6 +93,47 @@ jobs:
             cache-control: public, max-age=86400
           glob: '**/*.png'
 
+  # ── LiD landing page ─────────────────────────────────────────────────────
+  deploy-lid:
+    name: Deploy lid.rheaapps.com
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lid
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: lid/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: lid/out
+          destination: lid.rheaapps.com
+          parent: false
+          headers: |-
+            cache-control: no-cache, no-store, must-revalidate
+          glob: '**/*.html'
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: lid/out/_next
+          destination: lid.rheaapps.com/_next
+          parent: false
+          headers: |-
+            cache-control: public, max-age=31536000, immutable
+
   # ── Privacy policy (static HTML) ─────────────────────────────────────────
   deploy-privacy:
     name: Deploy privacy.reckon.rheaapps.com
